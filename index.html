@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
+    <title>Slide Generator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #slideForm {
+            text-align: center;
+        }
+        #slideContent {
+            width: 80vw; /* Set width to 80% of the viewport width */
+            height: 400px; /* Approx. 20 lines */
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="slideForm">
+        <textarea id="slideContent" placeholder="Enter slide content" required></textarea>
+        <button type="submit">Generate</button>
+    </form>
+    <div id="fullpage">
+        <!-- Slides will be generated here -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+    <script>
+        const form = document.getElementById('slideForm');
+        const fullpageContainer = document.getElementById('fullpage');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const slideContent = document.getElementById('slideContent').value;
+
+            // Create a new slide
+            const slide = document.createElement('div');
+            slide.className = 'section';
+            slide.innerHTML = `<h1>${slideContent}</h1>`;
+            fullpageContainer.appendChild(slide);
+
+            // Reset the input
+            form.reset();
+
+            // Reinitialize fullPage.js
+            new fullpage('#fullpage', {
+                // Options here
+            });
+        });
+    </script>
+</body>
+</html>
